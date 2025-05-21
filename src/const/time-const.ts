@@ -1,0 +1,11 @@
+export const SECOND = 1000;
+export const MINUTE = SECOND * 60;
+export const HOUR = MINUTE * 60;
+export const DAY = HOUR * 24;
+export const WEEK = DAY * 7;
+export const MONTH_28 = DAY * 28;
+export const MONTH_29 = DAY * 29;
+export const MONTH_30 = DAY * 30;
+export const MONTH_31 = DAY * 31;
+export const MONTH = MONTH_30;
+export const YEAR = DAY * 365;
