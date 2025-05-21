@@ -1,14 +1,19 @@
 {
   "name": "@andrash/nest-utils",
   "version": "1.0.0",
-  "description": "",
+  "description": "Common utils for NestJS Projects. These tools are gathered form my old NestJS projects so that I can use them in my future projects.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": "https://github.com/cocoychris/nest-utils",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Andrash Yang",
+  "license": "MIT",
   "packageManager": "pnpm@10.8.1",
   "dependencies": {
     "@nestjs/common": "^10.4.17",
