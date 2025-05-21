@@ -1,17 +1,17 @@
-import { TransformFnParams } from 'class-transformer';
+import { TransformFnParams } from "class-transformer";
 /**
  * 將字串轉換為布林值的轉換函數。用於 class-transformer 的 `@Transform()` 裝飾器。
  * 若 value 非字串則不會轉換，直接回傳原值。字串內容必須為 'true' 或 'false'，否則會拋出錯誤。
  */
 export function stringToBoolean({ value, key }: TransformFnParams): boolean {
-  if (typeof value !== 'string') {
+  if (typeof value !== "string") {
     return value;
   }
   value = value.trim().toLowerCase();
-  if (value === 'true') {
+  if (value === "true") {
     return true;
   }
-  if (value === 'false') {
+  if (value === "false") {
     return false;
   }
   throw new Error(`Value of ${key} must be 'true' or 'false' but got ${value}`);
@@ -36,14 +36,14 @@ export function undefinedToNull({ value }: TransformFnParams): any {
 }
 
 export function emptyStringToNull({ value }: TransformFnParams): any {
-  if (value === '') {
+  if (value === "") {
     return null;
   }
   return value;
 }
 
 export function emptyStringToUndefined({ value }: TransformFnParams): any {
-  if (value === '') {
+  if (value === "") {
     return undefined;
   }
   return value;
@@ -55,7 +55,7 @@ export function emptyStringToUndefined({ value }: TransformFnParams): any {
  * 字串內容必須為合法的整數，否則會拋出錯誤。
  */
 export function stringToInteger({ value, key }: TransformFnParams): number {
-  if (typeof value !== 'string') {
+  if (typeof value !== "string") {
     return value;
   }
   const num = parseInt(value, 10);
@@ -71,7 +71,7 @@ export function stringToInteger({ value, key }: TransformFnParams): number {
  * 字串內容必須為合法的數字，否則會拋出錯誤。
  */
 export function stringToNumber({ value, key }: TransformFnParams): number {
-  if (typeof value !== 'string') {
+  if (typeof value !== "string") {
     return value;
   }
   const num = Number(value);
@@ -86,7 +86,7 @@ export function stringToNumber({ value, key }: TransformFnParams): number {
  * 當 value 為 'null' 時回傳 null，否則回傳原值。
  */
 export function stringToNull({ value }: TransformFnParams): any {
-  if (value === 'null') {
+  if (value === "null") {
     return null;
   }
   return value;
@@ -100,23 +100,23 @@ export function stringToNull({ value }: TransformFnParams): any {
  * @returns 傳回可用於 `@Transform()` 裝飾器的轉換函數。
  */
 export function stringToArray(
-  options: { delimiter?: string; elementType?: 'string' | 'number' } = {},
+  options: { delimiter?: string; elementType?: "string" | "number" } = {}
 ) {
-  const { delimiter = ',', elementType = 'string' } = options;
+  const { delimiter = ",", elementType = "string" } = options;
   return ({ value, key }: TransformFnParams): any[] => {
-    if (typeof value !== 'string') {
+    if (typeof value !== "string") {
       return value;
     }
     const array = value.split(delimiter).map((item) => item.trim());
-    if (elementType === 'string') {
+    if (elementType === "string") {
       return array;
     }
-    if (elementType === 'number') {
+    if (elementType === "number") {
       return array.map((item, index) => {
         const num = Number(item);
         if (isNaN(num)) {
           throw new Error(
-            `Value of ${key}[${index}] must be a number but got '${item}'`,
+            `Value of ${key}[${index}] must be a number but got '${item}'`
           );
         }
         return num;
@@ -130,13 +130,13 @@ export function stringToArray(
  * 當 value 非字串時不會轉換，直接回傳原值。
  */
 export function stringToDate({ value, key }: TransformFnParams): Date {
-  if (typeof value !== 'string') {
+  if (typeof value !== "string") {
     return value;
   }
   const date = new Date(value);
   if (isNaN(date.getTime())) {
     throw new Error(
-      `Value of ${key} must be a valid date string but got ${value}`,
+      `Value of ${key} must be a valid date string but got ${value}`
     );
   }
   return date;
@@ -172,8 +172,8 @@ export function copyFrom(options: {
  * 當 value 非字串時不會轉換，直接回傳原值。
  * 字串內容必須為合法的 JSON 格式，否則會拋出錯誤。
  */
-export function jsonStringToObject({ value }): object {
-  if (typeof value === 'string') {
+export function jsonStringToObject({ value }: TransformFnParams): any {
+  if (typeof value === "string") {
     return JSON.parse(value);
   }
   return value;
